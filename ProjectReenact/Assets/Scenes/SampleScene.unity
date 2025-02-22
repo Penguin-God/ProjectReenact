@@ -119,6 +119,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &56026931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56026932}
+  - component: {fileID: 56026933}
+  m_Layer: 0
+  m_Name: SimulationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56026932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56026931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 721414020}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &56026933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56026931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569ab0a0ca564234090409ad8d9ab1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simulationCondition: {fileID: 1546880274}
 --- !u!1 &226215059
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae82ffc88b47e56498298bdeb03075a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
   _id: 1
 --- !u!212 &226215061
 SpriteRenderer:
@@ -648,6 +694,7 @@ Transform:
   m_Children:
   - {fileID: 1780334246}
   - {fileID: 1546880273}
+  - {fileID: 56026932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546880272
@@ -695,8 +742,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulationConditions:
-  - id1: 1
-    id2: 2
+  - _name: "\uCC98\uC74C"
+    _id1: 1
+    _id2: 2
+    _simulationId: 1
     simulationEvent:
       m_PersistentCalls:
         m_Calls:
@@ -712,8 +761,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - id1: 2
-    id2: 3
+  - _name: "\uB450\uBC88\uC9F8"
+    _id1: 2
+    _id2: 3
+    _simulationId: 2
     simulationEvent:
       m_PersistentCalls:
         m_Calls:
@@ -729,6 +780,13 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  simulationProgressDatas:
+  - _progress: 0
+    ableSimulatoins: 01000000
+    advancementSimulations: 01000000
+  - _progress: 1
+    ableSimulatoins: 02000000
+    advancementSimulations: 00000000
 --- !u!1 &1725395481
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae82ffc88b47e56498298bdeb03075a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
   _id: 2
 --- !u!212 &1725395483
 SpriteRenderer:
@@ -921,7 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20fd1aa0270c0a44ca39b68913c013d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simulationConditions: {fileID: 1546880274}
+  simulationBehaviour: {fileID: 56026933}
 --- !u!1 &1817543884
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae82ffc88b47e56498298bdeb03075a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
   _id: 3
 --- !u!212 &1817543886
 SpriteRenderer:

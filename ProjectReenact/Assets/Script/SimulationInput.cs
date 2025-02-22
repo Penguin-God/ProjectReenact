@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class SimulationInput : MonoBehaviour
 {
-    [SerializeField] SimulationConditionContainer simulationConditions;
+    [SerializeField] SimulationBehaviour simulationBehaviour;
     List<int> clickedIDs = new List<int>();
 
     void Update()
@@ -24,19 +24,9 @@ public class SimulationInput : MonoBehaviour
 
             if (clickedIDs.Count == 2)
             {
-                CheckCombination(clickedIDs);
+                simulationBehaviour.TryReenact(clickedIDs);
                 clickedIDs.Clear();
             }
-        }
-    }
-
-    // 두 ID의 조합에 따라 이벤트를 실행하는 함수
-    void CheckCombination(List<int> ids)
-    {
-        foreach(SimulationCondition condition in simulationConditions.SimulationConditions)
-        {
-            if (ids.Contains(condition.id1) && ids.Contains(condition.id2))
-                condition.DoSimulation();
         }
     }
 }
