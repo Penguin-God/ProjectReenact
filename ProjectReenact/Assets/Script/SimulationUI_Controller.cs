@@ -15,6 +15,9 @@ public class SimulationUI_Controller : MonoBehaviour
     {
         _objtext1 = GetComponentsInChildren<TextMeshProUGUI>()[0];
         _objtext2 = GetComponentsInChildren<TextMeshProUGUI>()[1];
+        _objtext1.text = "";
+        _objtext2.text = "";
+
         _linkBtn = GetComponentInChildren<Button>();
         _linkBtn.onClick.AddListener(TrySimulation);
     }

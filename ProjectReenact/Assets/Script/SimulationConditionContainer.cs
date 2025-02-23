@@ -33,8 +33,8 @@ public class SimulationProgressData
 
 public class SimulationConditionContainer : MonoBehaviour
 {
-    [SerializeField] SimulationData[] simulationConditions;
-    public IReadOnlyCollection<SimulationData> SimulationConditions => simulationConditions;
+    [SerializeField] SimulationData[] simulationDatas;
+    public IReadOnlyCollection<SimulationData> SimulationConditions => simulationDatas;
 
     [SerializeField] SimulationProgressData[] simulationProgressDatas;
     public SimulationProgressData GetProgressData(int progress) => simulationProgressDatas[progress];
