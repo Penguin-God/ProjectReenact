@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimulationBehaviour : MonoBehaviour
 {
     [SerializeField] SimulationConditionContainer simulationCondition;
-    int _currnetProgress;
+    [SerializeField] int _currnetProgress;
     readonly HashSet<int> _executedEvents = new();
 
     public void TryReenact(IEnumerable<int> ids)
