@@ -9,11 +9,13 @@ public class SimulationData
     [SerializeField] int _id1;
     [SerializeField] int _id2;
     [SerializeField] int _simulationId;
+    [SerializeField] int[] preconditionEvents;
 
     public string Name => _name;
     public int Id1 => _id1;
     public int Id2 => _id2;
     public int SimulationId => _simulationId;
+    public IReadOnlyCollection<int> PreconditionEvents => preconditionEvents;
 
     [SerializeField] UnityEvent simulationEvent;
     public void DoSimulation() => simulationEvent?.Invoke();
