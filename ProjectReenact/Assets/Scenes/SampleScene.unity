@@ -129,15 +129,13 @@ GameObject:
   m_Component:
   - component: {fileID: 100815997}
   - component: {fileID: 100815998}
-  - component: {fileID: 100815999}
-  - component: {fileID: 100816000}
   m_Layer: 0
   m_Name: CrashClue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &100815997
 Transform:
   m_ObjectHideFlags: 0
@@ -151,7 +149,7 @@ Transform:
   m_LocalScale: {x: 1.1037655, y: 0.4960772, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1534467075}
+  m_Father: {fileID: 336866681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &100815998
 SpriteRenderer:
@@ -208,66 +206,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &100815999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100815996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae82ffc88b47e56498298bdeb03075a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _name: 
-  _id: 4
---- !u!61 &100816000
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100815996}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &158271553
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +519,7 @@ Transform:
   - {fileID: 775837723}
   - {fileID: 1059267521}
   - {fileID: 1159623479}
+  - {fileID: 100815997}
   - {fileID: 1534467075}
   - {fileID: 1793756664}
   m_Father: {fileID: 0}
@@ -2127,7 +2066,6 @@ Transform:
   - {fileID: 492110424}
   - {fileID: 1912731264}
   - {fileID: 735479340}
-  - {fileID: 100815997}
   - {fileID: 264275525}
   - {fileID: 894289088}
   - {fileID: 1009996385}
@@ -2874,6 +2812,18 @@ MonoBehaviour:
             m_StringArgument: 1
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 100815996}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 1
+            m_BoolArgument: 1
+          m_CallState: 2
   - _name: "\uAD50\uCCB4"
     _id1: 6
     _id2: 7
@@ -3299,7 +3249,6 @@ MonoBehaviour:
   - {fileID: 492110427}
   - {fileID: 1912731266}
   - {fileID: 735479341}
-  - {fileID: 100815999}
   - {fileID: 264275527}
   - {fileID: 894289089}
   - {fileID: 1009996386}
