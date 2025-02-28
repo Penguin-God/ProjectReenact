@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class SimulationBehaviour : MonoBehaviour
 {
     [SerializeField] SimulationConditionContainer simulationCondition;
+    public event Action<int> OnExcuteEvent;
     readonly HashSet<int> _executedEvents = new();
 
     public void TryReenact(IEnumerable<int> ids)
@@ -15,6 +17,7 @@ public class SimulationBehaviour : MonoBehaviour
             {
                 data.DoSimulation();
                 _executedEvents.Add(data.SimulationId);
+                OnExcuteEvent?.Invoke(data.SimulationId);
             }
         }
     }
