@@ -44,9 +44,6 @@ public class ReenactSystem : MonoBehaviour
         }
     }
 
-    // 이런식으로 오브젝트 없어지기, 조건에 따라 행동에 대한 이벤트 실행하기. (유물 3개 모으고 삼각형 밖에서 올바른 상형문자 선택 시 마을 없어지기)
-    // 연출은 하얀색 화면으로 바뀐 후 텅 비기
-    // 오브젝트 상호작용으로 변경하기. 이동도 액터, 위치 선택 후 이동으로 고르면 됨
     void OnclickActoinButton(InteractObject interactObject, ActionType actionType)
     {
         if (currentActionPhase != 2) return;
@@ -65,9 +62,11 @@ public class ReenactSystem : MonoBehaviour
             case ActionType.Move:
                 actor.transform.position = interactObject.transform.position;
                 actor.transform.position = new Vector3(actor.transform.position.x, actor.transform.position.y, -1);
+                actor.currentLocation = interactObject.objName;
                 break;
             case ActionType.Get:
-                interactObject.gameObject.SetActive(false);
+                if(actor.currentLocation == interactObject.objName)
+                    interactObject.gameObject.SetActive(false);
                 break;
             case ActionType.PutDown:
                 break;
