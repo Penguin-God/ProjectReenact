@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +8,7 @@ public enum ActionType
 {
     Move,
     Get,
-    PutDown,
+    Combine,
 }
 
 public class ReenactSystem : MonoBehaviour
@@ -16,6 +18,7 @@ public class ReenactSystem : MonoBehaviour
     [SerializeField] int currentActionPhase;
     [SerializeField] Transform actoinBthParent;
     [SerializeField] GameObject actionBtn;
+    [SerializeField] List<InteractObject> holdObjects;
 
     // 액터 먼저 클릭하고 저장하고 오브젝트 클릭하고 저장하고 행동 선택해서 이동하기
     void Update()
@@ -54,7 +57,7 @@ public class ReenactSystem : MonoBehaviour
         foreach (Transform child in actoinBthParent)
             Destroy(child.gameObject);
     }
-
+    
     void Action(Actor actor, InteractObject interactObject, ActionType actionType)
     {
         switch (actionType)
@@ -62,13 +65,19 @@ public class ReenactSystem : MonoBehaviour
             case ActionType.Move:
                 actor.transform.position = interactObject.transform.position;
                 actor.transform.position = new Vector3(actor.transform.position.x, actor.transform.position.y, -1);
-                actor.currentLocation = interactObject.objName;
+                actor.currentLocation = interactObject.locationId;
                 break;
             case ActionType.Get:
-                if(actor.currentLocation == interactObject.objName)
+                if(actor.currentLocation == interactObject.locationId)
+                {
                     interactObject.gameObject.SetActive(false);
+                    holdObjects.Add(interactObject);
+                }
                 break;
-            case ActionType.PutDown:
+            case ActionType.Combine:
+                string[] allPots = new string[] { "pot1", "pot2", "pot3" };
+                if (allPots.All(x => holdObjects.Select(obj => obj.objName).Contains(x)))
+                    print("yes");
                 break;
             default:
                 break;
