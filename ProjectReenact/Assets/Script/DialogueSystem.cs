@@ -2,6 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
+using System.Linq;
+
+[Serializable]
+public struct DialogueData
+{
+    public string id;
+    [TextArea(3, 3)]
+    public string[] texts;
+}
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -10,22 +20,35 @@ public class DialogueSystem : MonoBehaviour
     public TextMeshProUGUI dialogueText;
 
     private Queue<string> sentences;
-    bool isDialoging;
+    public bool isDialoging;
+    [SerializeField] string currentDialogueId;
+
+    [SerializeField] DialogueData[] dialogueDatas;
+    Dictionary<string, bool> dialogueSeenFlag;
 
     void Awake()
     {
+        dialogueSeenFlag = dialogueDatas.ToDictionary(x => x.id, x => false);
         sentences = new Queue<string>();
         dialogueUI.SetActive(false);
     }
 
-    public void StartDialogue(DialogueObject dialogueObj)
+    public bool IsSeen(string id) => dialogueSeenFlag[id];
+
+    public void StartDialogue(string dialogueId)
+    {
+        currentDialogueId = dialogueId;
+        StartDialogue(dialogueDatas.First(x => x.id == dialogueId).texts);
+    }
+
+    void StartDialogue(string[] dialogue)
     {
         if (isDialoging) return;
 
         isDialoging = true;
         dialogueUI.SetActive(true);
         sentences.Clear();
-        foreach (string sentence in dialogueObj.dialogue)
+        foreach (string sentence in dialogue)
             sentences.Enqueue(sentence);
         DisplayNextSentence();
     }
@@ -60,6 +83,8 @@ public class DialogueSystem : MonoBehaviour
 
     private void EndDialogue()
     {
+        dialogueSeenFlag[currentDialogueId] = true;
+        currentDialogueId = "";
         isDialoging = false;
         dialogueUI.SetActive(false);
     }

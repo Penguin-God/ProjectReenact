@@ -68,14 +68,11 @@ public class ReenactSystem : MonoBehaviour
                 actor.currentLocation = interactObject.locationId;
                 break;
             case ActionType.Get:
-                if(actor.currentLocation == interactObject.locationId)
-                {
-                    interactObject.gameObject.SetActive(false);
-                    holdObjects.Add(interactObject);
-                }
+                interactObject.gameObject.SetActive(false);
+                holdObjects.Add(interactObject);
                 break;
             case ActionType.Combine:
-                string[] allPots = new string[] { "pot1", "pot2", "pot3" };
+                string[] allPots = new string[] { "유물1", "유물2", "유물3" };
                 if (allPots.All(x => holdObjects.Select(obj => obj.objName).Contains(x)))
                     print("yes");
                 break;
