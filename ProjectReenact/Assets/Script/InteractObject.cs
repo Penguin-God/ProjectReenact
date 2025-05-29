@@ -6,4 +6,5 @@ public class InteractObject : MonoBehaviour
     public string objName;
     public int locationId;
     public ActionType[] albeActions;
+    public ActionData[] albeActionDatas;
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +13,21 @@ public enum ActionType
     Combine,
 }
 
+public enum UI_Type
+{
+    Image,
+    Button,
+}
+
+[Serializable]
+public struct ActionData
+{
+    public ActionType actionType;
+    public UI_Type ui_type;
+    public string actName;
+    public Sprite sprite;
+}
+
 public class ReenactSystem : MonoBehaviour
 {
     public LayerMask clickableLayer;
@@ -18,6 +35,7 @@ public class ReenactSystem : MonoBehaviour
     [SerializeField] int currentActionPhase;
     [SerializeField] Transform actoinBthParent;
     [SerializeField] GameObject actionBtn;
+    [SerializeField] GameObject actionImage;
     [SerializeField] List<InteractObject> holdObjects;
 
     // 액터 먼저 클릭하고 저장하고 오브젝트 클릭하고 저장하고 행동 선택해서 이동하기
@@ -36,11 +54,20 @@ public class ReenactSystem : MonoBehaviour
                 currentActionPhase = 1;
             else if(currentActionPhase == 1 && hit.collider.TryGetComponent(out InteractObject interactObj))
             {
-                foreach (var action in interactObj.albeActions)
+                foreach (var data in interactObj.albeActionDatas)
                 {
-                    var btn = Instantiate(actionBtn, actoinBthParent).GetComponent<Button>();
-                    btn.GetComponentInChildren<TextMeshProUGUI>().text = action.ToString();
-                    btn.onClick.AddListener(() => OnclickActoinButton(interactObj, action));
+                    if(data.ui_type == UI_Type.Button)
+                    {
+                        var btn = Instantiate(actionBtn, actoinBthParent).GetComponent<Button>();
+                        btn.GetComponentInChildren<TextMeshProUGUI>().text = data.actName;
+                        btn.onClick.AddListener(() => OnclickActoinButton(interactObj, data.actionType));
+                    }
+                    else
+                    {
+                        var btn = Instantiate(actionImage, actoinBthParent).GetComponent<Button>();
+                        btn.onClick.AddListener(() => OnclickActoinButton(interactObj, data.actionType));
+                        btn.GetComponent<Image>().sprite = data.sprite;
+                    }
                 }
                 currentActionPhase = 2;
             }
@@ -73,7 +100,7 @@ public class ReenactSystem : MonoBehaviour
                 break;
             case ActionType.Combine:
                 string[] allPots = new string[] { "유물1", "유물2", "유물3" };
-                if (allPots.All(x => holdObjects.Select(obj => obj.objName).Contains(x)))
+                if (allPots.All(x => holdObjects.Select(obj => obj.objName).Contains(x)) && actor.currentLocation == 2)
                     print("yes");
                 break;
             default:
