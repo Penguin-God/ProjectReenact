@@ -8,9 +8,11 @@ using UnityEngine.UI;
 
 public enum ActionType
 {
+    None,
     Move,
     Get,
     Combine,
+    Break,
 }
 
 public enum UI_Type
@@ -37,6 +39,7 @@ public class ReenactSystem : MonoBehaviour
     [SerializeField] GameObject actionBtn;
     [SerializeField] GameObject actionImage;
     [SerializeField] List<InteractObject> holdObjects;
+    [SerializeField] DialogueSystem dialogueSystem;
 
     // 액터 먼저 클릭하고 저장하고 오브젝트 클릭하고 저장하고 행동 선택해서 이동하기
     void Update()
@@ -100,8 +103,8 @@ public class ReenactSystem : MonoBehaviour
                 break;
             case ActionType.Combine:
                 string[] allPots = new string[] { "유물1", "유물2", "유물3" };
-                if (allPots.All(x => holdObjects.Select(obj => obj.objName).Contains(x)) && actor.currentLocation == 2)
-                    print("yes");
+                if (allPots.All(x => holdObjects.Select(obj => obj.objName).Contains(x)))
+                    dialogueSystem.StartDialogue("재연성공");
                 break;
             default:
                 break;
