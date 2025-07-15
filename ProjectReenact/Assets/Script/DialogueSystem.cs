@@ -81,7 +81,7 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    private void EndDialogue()
+    void EndDialogue()
     {
         dialogueSeenFlag[currentDialogueId] = true;
         currentDialogueId = "";
