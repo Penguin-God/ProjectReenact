@@ -38,9 +38,4 @@ public class SimlualationManager : MonoBehaviour
                 data.SuccessSimulation();
         }
     }
-
-    void Start()
-    {
-        // TryProgressSimulation(1, 2);    
-    }
 }

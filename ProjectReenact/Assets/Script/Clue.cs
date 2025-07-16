@@ -5,4 +5,5 @@ public class Clue : MonoBehaviour
 {
     public string objName;
     public int id;
+    public string description;
 }
