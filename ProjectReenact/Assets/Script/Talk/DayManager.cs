@@ -59,8 +59,8 @@ public class DayManager : MonoBehaviour
         {
             case DayState.AtHome: next = DayState.MovingToFacility; break;
             case DayState.MovingToFacility: next = DayState.SelectingNPC; break;
-            case DayState.SelectingNPC: next = DayState.InConversation; break;
-            case DayState.InConversation: next = DayState.OffWork; break;
+            case DayState.SelectingNPC: return;
+            case DayState.InConversation: return;
             case DayState.OffWork: next = DayState.Sleeping; break;
             case DayState.Sleeping:
                 currentDay++;
@@ -88,11 +88,9 @@ public class DayManager : MonoBehaviour
     public void OnNPCSelected(int npcId)
     {
         SetPhase(DayState.InConversation);
+        FindAnyObjectByType<MemoryGraphManager>().BuildGraph("start");
     }
 
     // 대화 UI에서 ‘대화 끝’ 버튼에 연결
-    public void OnConversationEnded()
-    {
-        AdvancePhase();  // OffWork 단계로
-    }
+    public void OnConversationEnded() => SetPhase(DayState.OffWork);
 }

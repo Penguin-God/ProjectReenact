@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87fe0ee752c428418beda02457d1afd, type: 3}
+  m_Name: New Memory Node Data 1
+  m_EditorClassIdentifier: 
+  nodeId: 1
+  thumbnail: {fileID: -9174718400023425536, guid: 74edc1f43f21f654b9bb2b1b70ae4db2, type: 3}
+  description: 1
+  relatedNodeIds: []
