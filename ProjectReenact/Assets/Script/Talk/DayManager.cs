@@ -88,7 +88,7 @@ public class DayManager : MonoBehaviour
     public void OnNPCSelected(int npcId)
     {
         SetPhase(DayState.InConversation);
-        FindAnyObjectByType<MemoryGraphManager>().BuildGraph("start");
+        // FindAnyObjectByType<MemoryGraphManager>().BuildGraph("start");
     }
 
     // 대화 UI에서 ‘대화 끝’ 버튼에 연결

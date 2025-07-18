@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87fe0ee752c428418beda02457d1afd, type: 3}
-  m_Name: New Memory Node Data 1
+  m_Script: {fileID: 11500000, guid: 12849d307e3d4a34185422b048be9844, type: 3}
+  m_Name: Node_Third 1
   m_EditorClassIdentifier: 
-  nodeId: 1
-  thumbnail: {fileID: -9174718400023425536, guid: 74edc1f43f21f654b9bb2b1b70ae4db2, type: 3}
-  description: 1
-  relatedNodeIds: []
+  id: 6
+  type: 6
+  children: []
+  manualPosition: {x: 2, y: 1}
