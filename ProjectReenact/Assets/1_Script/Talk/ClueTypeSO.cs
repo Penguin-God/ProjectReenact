@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "MindMap/Clue")]
+[CreateAssetMenu(menuName = "Clue/Clue")]
 public class ClueTypeSO : ScriptableObject
 {
     public string type;
