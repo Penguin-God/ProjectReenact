@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Node_Create1 1
   m_EditorClassIdentifier: 
   id: 7
-  type: 7
+  type: "\uC0DD\uC1312"
   children: []
   manualPosition: {x: 2, y: 0}

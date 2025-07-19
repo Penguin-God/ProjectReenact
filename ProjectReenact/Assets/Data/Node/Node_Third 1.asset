@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Node_Third 1
   m_EditorClassIdentifier: 
   id: 6
-  type: 6
+  type: 3-2
   children: []
-  manualPosition: {x: 2, y: 1}
+  manualPosition: {x: 3.4641013, y: -2.0000007}

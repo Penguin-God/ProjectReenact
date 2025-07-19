@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Node_Start
   m_EditorClassIdentifier: 
   id: 1
-  type: 1
+  type: "\uC2DC\uC791"
   children:
   - {fileID: 11400000, guid: 9979a7c59f8b957409927971d829556f, type: 2}
   - {fileID: 11400000, guid: a947a52b3e1607a4fa154e69d0ba6d77, type: 2}

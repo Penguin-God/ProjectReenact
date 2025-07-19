@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Node_Second 2
   m_EditorClassIdentifier: 
   id: 4
-  type: 4
+  type: 2-2
   children:
   - {fileID: 11400000, guid: 77e66be8c6d413643a5691b15d59218c, type: 2}
   - {fileID: 11400000, guid: 2e27f9b310455e345b825518d61ad38b, type: 2}
-  manualPosition: {x: 1, y: 1}
+  manualPosition: {x: 0.9999998, y: -1.7320509}
