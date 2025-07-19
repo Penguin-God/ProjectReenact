@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8e104012b0ec1146b73915e9a241f3a, type: 3}
-  m_Name: New Clue SO
+  m_Script: {fileID: 11500000, guid: b13f032900634244fb7c4f9cac14dc9f, type: 3}
+  m_Name: "\uC218\uC815\uAD6C"
   m_EditorClassIdentifier: 
-  type: 1
+  clueA: {fileID: 11400000, guid: 1d5a4fda659880e4a9d4be2620d04621, type: 2}
+  clueB: {fileID: 11400000, guid: b341692a85926ff4295ec2d0dc566d2f, type: 2}
+  events: []
