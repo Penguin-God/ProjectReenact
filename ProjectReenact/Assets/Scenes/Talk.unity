@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebfaf31dd415db64fa7b460e872c8a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  nodeData: {fileID: 0}
   id: 
   nodeType: 
 --- !u!61 &201452350
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 202089931}
   - component: {fileID: 202089932}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,9 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d27c7650cffca408aba8a49cd1ad6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mergeRecipes: {fileID: 11400000, guid: eaf34f6fe56965346872f5c0f5cc53cf, type: 2}
   nodePrefab: {fileID: 201452346}
-  linePrefab: {fileID: 1270286956}
-  recipes: []
 --- !u!114 &202089932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +406,7 @@ MonoBehaviour:
   root: {fileID: 11400000, guid: f6af13484b990b845ba3b1867aa30a3e, type: 2}
   nodePrefab: {fileID: 201452346}
   linePrefab: {fileID: 1270286956}
-  layerGap: 3
+  layerGap: 2
   autoLayout: 1
 --- !u!1 &524147244
 GameObject:

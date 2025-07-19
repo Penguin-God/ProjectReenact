@@ -1,166 +1,87 @@
-using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class MergeManager : MonoBehaviour
 {
-    // --- 싱글턴 편의용 ---
     public static MergeManager Instance { get; private set; }
-    void Awake() => Instance = this;
 
-    [Header("생성에 사용할 프리팹")]
-    public GameObject nodePrefab;       // 새 노드 만들 때 사용
-    public LineRenderer linePrefab;     // 선 다시 그릴 때 사용
+    [Header("머지 데이터")]
+    public MergeRecipes mergeRecipes;
+    [Header("생성할 노드 Prefab")]
+    public GameObject nodePrefab;
 
-    [Header("허용된 조합: (A,B) → C")]
-    public List<Recipe> recipes;        // 인스펙터에서 세팅
+    NodeBehaviour firstSelected;
 
-    NodeBehaviour waiting;              // 첫 번째로 클릭된 노드
-
-    // ----------------------------------------------------------------------------------
-
-    /// <summary>노드 클릭 시 호출</summary>
-    public void SelectNode(NodeBehaviour node)
+    void Awake()
     {
-        // 1) 첫 선택 없다면 보류
-        if (waiting == null)
-        {
-            waiting = node;
-            Highlight(waiting, true);
-            return;
-        }
-
-        // 2) 같은 노드 다시 누르면 취소
-        if (waiting == node)
-        {
-            Highlight(waiting, false);
-            waiting = null;
-            return;
-        }
-
-        // 3) 두 번째 노드 → 조합 검사
-        string resultType = GetResult(waiting.nodeType, node.nodeType);
-
-        if (resultType == null)                    // 불가한 조합
-        {
-            // 피드백 (색 반짝이기 등) 넣고 초기화
-            FlashRed(node);
-            Highlight(waiting, false);
-            waiting = null;
-            return;
-        }
-
-        // 4) 합치기
-        Merge(waiting, node, resultType);
-        waiting = null;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    /******************* 내부 로직 *******************/
-    void Merge(NodeBehaviour a, NodeBehaviour b, string resultType)
+    public void SelectNode(NodeBehaviour nb)
     {
-        // 새 위치 = 두 노드 중간
-        Vector3 pos = (a.transform.position + b.transform.position) / 2f;
-
-        // 새 노드 생성
-        GameObject newObj = Instantiate(nodePrefab, pos, Quaternion.identity);
-        var nb = newObj.GetComponent<NodeBehaviour>();
-        nb.nodeType = resultType;
-        newObj.name = $"Node_{resultType}";
-
-        // 연결 라인 다시 그리기
-        //   ① a,b 와 연결돼 있던 LineRenderer 전부 파괴
-        foreach (Transform child in a.transform.parent)  // 노드들이 한 부모 밑에 있다고 가정
+        // 1) 첫 선택
+        if (firstSelected == null)
         {
-            var lr = child.GetComponent<LineRenderer>();
-            if (lr && (lr.GetPosition(0) == a.transform.position ||
-                       lr.GetPosition(1) == a.transform.position ||
-                       lr.GetPosition(0) == b.transform.position ||
-                       lr.GetPosition(1) == b.transform.position))
-                Destroy(child.gameObject);
+            firstSelected = nb;
+            Highlight(nb.gameObject, true);
+            return;
         }
 
-        //   ② 두 노드가 갖고 있던 이웃 찾아 새 노드에 연결
-        var neighbours = GatherNeighbours(a);
-        neighbours.UnionWith(GatherNeighbours(b));
-        neighbours.Remove(a); neighbours.Remove(b);
-
-        foreach (var n in neighbours)
+        // 2) 같은 노드 다시 클릭 → 취소
+        if (nb == firstSelected)
         {
-            DrawLine(newObj.transform.position, n.transform.position);
+            Highlight(firstSelected.gameObject, false);
+            firstSelected = null;
+            return;
         }
 
-        // 옛 노드 삭제
+        // 3) 두 번째 선택 → 머지 시도
+        TryMerge(firstSelected, nb);
+        Highlight(firstSelected.gameObject, false);
+        firstSelected = null;
+    }
+
+    void TryMerge(NodeBehaviour a, NodeBehaviour b)
+    {
+        // recipes에서 (A,B) 또는 (B,A) 조합 검색
+        var recipe = mergeRecipes.recipes
+            .FirstOrDefault(r =>
+                (r.nodeA == a.nodeData && r.nodeB == b.nodeData) ||
+                (r.nodeA == b.nodeData && r.nodeB == a.nodeData));
+
+        if (recipe == null)
+        {
+            // 실패 피드백
+            StartCoroutine(FlashRed(a.gameObject));
+            StartCoroutine(FlashRed(b.gameObject));
+            return;
+        }
+
+        // 성공: 새 노드 만들고, 기존 2개 파괴
+        Vector3 spawnPos = (a.transform.position + b.transform.position) * 0.5f;
         Destroy(a.gameObject);
         Destroy(b.gameObject);
+
+        GameObject go = Instantiate(nodePrefab, spawnPos, Quaternion.identity);
+        var nb = go.GetComponent<NodeBehaviour>();
+        nb.nodeData = recipe.resultNode;
+        go.name = $"Node_{recipe.resultNode.id}";
     }
 
-    HashSet<NodeBehaviour> GatherNeighbours(NodeBehaviour node)
+    IEnumerator FlashRed(GameObject go)
     {
-        HashSet<NodeBehaviour> set = new();
-        foreach (Transform child in node.transform.parent)
-        {
-            var lr = child.GetComponent<LineRenderer>();
-            if (lr == null) continue;
-
-            if (lr.GetPosition(0) == node.transform.position)
-            {
-                NodeBehaviour other = FindNodeAt(lr.GetPosition(1));
-                if (other) set.Add(other);
-            }
-            else if (lr.GetPosition(1) == node.transform.position)
-            {
-                NodeBehaviour other = FindNodeAt(lr.GetPosition(0));
-                if (other) set.Add(other);
-            }
-        }
-        return set;
-    }
-
-    NodeBehaviour FindNodeAt(Vector3 pos)
-    {
-        // 간단히 거리가 매우 작은 노드 탐색
-        foreach (var nb in FindObjectsOfType<NodeBehaviour>())
-            if (Vector2.Distance(nb.transform.position, pos) < 0.01f)
-                return nb;
-        return null;
-    }
-
-    /******************* 유틸 & 데이터 구조 *******************/
-    [System.Serializable]
-    public class Recipe
-    {
-        public string typeA;
-        public string typeB;
-        public string resultType;
-    }
-
-    string GetResult(string a, string b)
-    {
-        foreach (var r in recipes)
-        {
-            bool match = (r.typeA == a && r.typeB == b) ||
-                         (r.typeA == b && r.typeB == a);
-            if (match) return r.resultType;
-        }
-        return null;    // 조합 불가
-    }
-
-    void DrawLine(Vector3 a, Vector3 b)
-    {
-        LineRenderer lr = Instantiate(linePrefab, transform);
-        lr.positionCount = 2;
-        lr.SetPosition(0, a);
-        lr.SetPosition(1, b);
-    }
-
-    // 시각적 보조 ─ 원하는 대로 교체
-    void Highlight(NodeBehaviour n, bool on) =>
-        n.GetComponent<SpriteRenderer>().color = on ? Color.yellow : Color.white;
-
-    void FlashRed(NodeBehaviour n)
-    {
-        var sr = n.GetComponent<SpriteRenderer>();
+        var sr = go.GetComponent<SpriteRenderer>();
+        var orig = sr.color;
         sr.color = Color.red;
-        Invoke(nameof(ResetColor), 0.2f);
-        void ResetColor() => sr.color = Color.white;
+        yield return new WaitForSeconds(0.2f);
+        sr.color = orig;
+    }
+
+    void Highlight(GameObject go, bool on)
+    {
+        var sr = go.GetComponent<SpriteRenderer>();
+        sr.color = on ? Color.yellow : Color.white;
     }
 }

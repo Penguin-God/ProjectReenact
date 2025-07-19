@@ -53,7 +53,7 @@ public class HierarchicalGraphSpawner : MonoBehaviour
         {
             go = Instantiate(nodePrefab, so.manualPosition, Quaternion.identity, transform);
             go.name = $"Node_{so.id}";
-            go.GetComponent<NodeBehaviour>().data = so;
+            go.GetComponent<NodeBehaviour>().nodeData = so;
             spawned[so] = go;
         }
 
