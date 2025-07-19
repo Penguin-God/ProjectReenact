@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e104012b0ec1146b73915e9a241f3a, type: 3}
   m_Name: New Clue SO
   m_EditorClassIdentifier: 
-  id: 1
-  prefab: {fileID: 4691592380933720893, guid: 6321fb2202aa59143a91e2b0384fe459, type: 3}
+  type: 1

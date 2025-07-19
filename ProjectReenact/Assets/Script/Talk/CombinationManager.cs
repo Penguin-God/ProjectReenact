@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CombineManager : MonoBehaviour
+public class CombinationManager : MonoBehaviour
 {
     [Tooltip("조합 가능한 모든 룰을 에셋으로 넣어두세요.")]
     public CombinationRuleSO[] allRules;
@@ -9,9 +9,7 @@ public class CombineManager : MonoBehaviour
     {
         foreach (var rule in allRules)
         {
-            bool matches =
-               (rule.clueA == c1.type && rule.clueB == c2.type) ||
-               (rule.clueA == c2.type && rule.clueB == c1.type);
+            bool matches = (rule.clueA == c1.type && rule.clueB == c2.type) || (rule.clueA == c2.type && rule.clueB == c1.type);
 
             if (!matches) continue;
 
