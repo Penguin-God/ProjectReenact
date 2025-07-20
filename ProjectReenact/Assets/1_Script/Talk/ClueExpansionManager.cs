@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ClueExpansionManager : MonoBehaviour
 {
@@ -15,31 +16,21 @@ public class ClueExpansionManager : MonoBehaviour
     [SerializeField] GameObject line;
 
     // ID → ClueBehaviour 맵
-    private Dictionary<string, ClueBehaviour> _clueDict;
-
-    void Awake()
-    {
-        // 씬에 있는 모든 ClueBehaviour 수집
-        _clueDict = new Dictionary<string, ClueBehaviour>();
-        foreach (var cb in FindObjectsOfType<ClueBehaviour>())
-        {
-            if (!_clueDict.ContainsKey(cb.ID))
-                _clueDict.Add(cb.ID, cb);
-            else
-                Debug.LogWarning($"중복된 ClueID: {cb.ID}");
-        }
-    }
+    [SerializeField] ClueManager clueManager;
+    Dictionary<string, ClueBehaviour> _clueDict => clueManager.Clues.ToDictionary(x => x.type.type, x => x);
 
     void Start()
     {
         // 1) 모든 단서 숨기기
-        foreach (var cb in _clueDict.Values)
+        foreach (var cb in clueManager.Clues)
             cb.SetAlpha(defaultHiddenAlpha);
 
         // 2) 시작 단서 공개 & 자식 노출
         if (startClue != null)
             Reveal(startClue);
     }
+
+
 
     public void Reveal(ClueBehaviour clue)
     {

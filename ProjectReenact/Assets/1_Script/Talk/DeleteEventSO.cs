@@ -1,14 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "MapEvent/Delete Event")]
 public class DeleteEventSO : MapEventSO
 {
-    public string targetTag;
+    public string targetId;
 
-    public override void Execute()
-    {
-        var gos = GameObject.FindGameObjectsWithTag(targetTag);
-        foreach (var go in gos)
-            Destroy(go);
-    }
+    public override void Execute(ClueManager clueManager) => clueManager.RemoveClue(targetId);
 }

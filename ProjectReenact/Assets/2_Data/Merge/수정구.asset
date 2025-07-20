@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clueA: {fileID: 11400000, guid: 1d5a4fda659880e4a9d4be2620d04621, type: 2}
   clueB: {fileID: 11400000, guid: b341692a85926ff4295ec2d0dc566d2f, type: 2}
-  events: []
+  events:
+  - {fileID: 11400000, guid: 10e430371493d6840ab5e16911905996, type: 2}
