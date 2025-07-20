@@ -35,9 +35,17 @@ public class CombineClickHandler : MonoBehaviour
         }
     }
 
+    [SerializeField] bool isCombine = false;
+    CombinationRuleSO currentRule = null;
+    public void StartCombination(CombinationRuleSO rule)
+    {
+        currentRule = rule;
+        isCombine = true;
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isCombine)
         {
             TrySelectClue();
         }
@@ -96,7 +104,8 @@ public class CombineClickHandler : MonoBehaviour
 
     private void ExecuteCombine()
     {
-        combinationManager.Combine(firstClue, secondClue);
+        // combinationManager.Combine(firstClue, secondClue);
+        combinationManager.Combine(currentRule, firstClue, secondClue);
         // 하이라이트 및 라인 제거
         ClearLine();
         ClearFirstSelection();
@@ -105,6 +114,8 @@ public class CombineClickHandler : MonoBehaviour
         // 상태 초기화
         firstClue = null;
         secondClue = null;
+        currentRule = null;
+        isCombine = false;
     }
 
     private void DrawConnectionLine()

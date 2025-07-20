@@ -41,9 +41,6 @@ public class ClueExpansionManager : MonoBehaviour
             Reveal(startClue);
     }
 
-    /// <summary>
-    /// 클릭 등으로 단서를 공개할 때 호출
-    /// </summary>
     public void Reveal(ClueBehaviour clue)
     {
         float startAhapa = 0.3f;
@@ -80,8 +77,5 @@ public class ClueExpansionManager : MonoBehaviour
         lr.useWorldSpace = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-
-        // 일정 시간 뒤 제거
-        // Destroy(go, rule.lineDuration);
     }
 }

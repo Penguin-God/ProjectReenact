@@ -180,8 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceca881d66e04af4497abd6648842e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allRules:
-  - {fileID: 11400000, guid: 87fb089c6994ddf4eaca8d90ee7cb569, type: 2}
 --- !u!114 &202089935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +197,7 @@ MonoBehaviour:
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   lineRenderer: {fileID: 202089936}
   feedbackDelay: 0.5
+  isCombine: 0
 --- !u!120 &202089936
 LineRenderer:
   serializedVersion: 2
@@ -1497,6 +1496,7 @@ GameObject:
   - component: {fileID: 1980051034}
   - component: {fileID: 1980051033}
   - component: {fileID: 1980051032}
+  - component: {fileID: 1980051036}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -1635,6 +1635,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1980051036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980051031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d16772627b03447800df73cf511eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combinationRule: {fileID: 11400000, guid: 87fb089c6994ddf4eaca8d90ee7cb569, type: 2}
 --- !u!1 &2030991854
 GameObject:
   m_ObjectHideFlags: 0
