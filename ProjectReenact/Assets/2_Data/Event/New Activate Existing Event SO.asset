@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452e6426396188c4181f5a120e51cdab, type: 3}
-  m_Name: New Replace Event SO
+  m_Script: {fileID: 11500000, guid: 3d340ef89d185fa4e85afb708cc49477, type: 3}
+  m_Name: New Activate Existing Event SO
   m_EditorClassIdentifier: 
-  activeId: 4
-  removeId: 3
+  targetID: 3

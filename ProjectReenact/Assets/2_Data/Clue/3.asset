@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8e104012b0ec1146b73915e9a241f3a, type: 3}
-  m_Name: "\uC218\uC815\uAD6C_\uAE68\uC9C0\uB294_\uC18C\uB9AC"
+  m_Name: 3
   m_EditorClassIdentifier: 
-  clueName: "\uC218\uC815\uAD6C\uAC00 \uAE68\uC9C0\uB294 \uC18C\uB9AC"
-  id: 4
+  clueName: "\uBCF5\uC6D0\uB410\uB2E4?"
+  id: 3

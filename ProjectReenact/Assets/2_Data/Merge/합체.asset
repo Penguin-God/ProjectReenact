@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b13f032900634244fb7c4f9cac14dc9f, type: 3}
-  m_Name: "\uC218\uC815\uAD6C"
+  m_Name: "\uD569\uCCB4"
   m_EditorClassIdentifier: 
-  clueA: {fileID: 11400000, guid: 1d5a4fda659880e4a9d4be2620d04621, type: 2}
-  clueB: {fileID: 11400000, guid: b341692a85926ff4295ec2d0dc566d2f, type: 2}
+  clueA: {fileID: 11400000, guid: 7c6b4789f8583e64dacc4491584c54bb, type: 2}
+  clueB: {fileID: 11400000, guid: 42b6b983c81d8064791f28db2d0cd33d, type: 2}
   events:
-  - {fileID: 11400000, guid: faf43c9499b487942a43d5cde290c5af, type: 2}
+  - {fileID: 11400000, guid: 13b0dc2f13f36b044864600f315aa093, type: 2}
