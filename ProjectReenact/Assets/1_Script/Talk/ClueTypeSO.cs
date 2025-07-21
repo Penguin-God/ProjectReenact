@@ -3,5 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Clue/Clue")]
 public class ClueTypeSO : ScriptableObject
 {
-    public string type;
+    public string clueName;
+    public string id;
 }

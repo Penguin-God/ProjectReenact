@@ -15,7 +15,5 @@ MonoBehaviour:
   parentClueID: start
   children:
   - childClueID: 1
-    initialAlpha: 0.4
   - childClueID: 2
-    initialAlpha: 0.4
-  lineWidth: 0.05
+  - childClueID: 3

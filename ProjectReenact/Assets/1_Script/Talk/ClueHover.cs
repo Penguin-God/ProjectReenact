@@ -24,7 +24,7 @@ public class ClueHover : MonoBehaviour
                 if (clue != lastClue)
                 {
                     // 새로운 클루로 호버 변경
-                    TooltipManager.Instance.Show(clue.type.type);
+                    TooltipManager.Instance.Show(clue.type.clueName);
                     lastClue = clue;
                 }
                 return;

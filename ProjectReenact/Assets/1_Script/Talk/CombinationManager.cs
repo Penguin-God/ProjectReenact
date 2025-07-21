@@ -10,6 +10,5 @@ public class CombinationManager : MonoBehaviour
 
         foreach (var ev in rule.events)
             ev.Execute(manager);
-        print("±â¸ð¶ì");
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452e6426396188c4181f5a120e51cdab, type: 3}
   m_Name: New Replace Event SO
   m_EditorClassIdentifier: 
-  activeId: 
-  removeId: 
+  activeId: 4
+  removeId: 3

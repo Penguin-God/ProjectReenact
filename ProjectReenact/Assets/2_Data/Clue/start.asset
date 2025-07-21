@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e104012b0ec1146b73915e9a241f3a, type: 3}
   m_Name: start
   m_EditorClassIdentifier: 
-  type: "\uC0AC\uB77C\uC9C4 \uB9C8\uC744"
+  clueName: "\uC0AC\uB77C\uC9C4 \uB9C8\uC744"
+  id: start

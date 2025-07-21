@@ -6,7 +6,7 @@ public class ClueManager : MonoBehaviour
 {
     [SerializeField] List<ClueBehaviour> clues;
     public IReadOnlyCollection<ClueBehaviour> Clues => clues;
-    Dictionary<string, ClueBehaviour> ClueDict => clues.ToDictionary(x => x.type.type, x => x);
+    public Dictionary<string, ClueBehaviour> ClueDict => clues.ToDictionary(x => x.type.id, x => x);
 
     void Awake()
     {

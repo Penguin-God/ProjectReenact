@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 
 public class ClueExpansionManager : MonoBehaviour
 {
@@ -17,13 +15,10 @@ public class ClueExpansionManager : MonoBehaviour
 
     // ID → ClueBehaviour 맵
     [SerializeField] ClueManager clueManager;
-    Dictionary<string, ClueBehaviour> _clueDict => clueManager.Clues.ToDictionary(x => x.type.type, x => x);
-
     void Start()
     {
-        // 1) 모든 단서 숨기기
         foreach (var cb in clueManager.Clues)
-            cb.SetAlpha(defaultHiddenAlpha);
+            cb.gameObject.SetActive(false);
 
         // 2) 시작 단서 공개 & 자식 노출
         if (startClue != null)
@@ -35,26 +30,21 @@ public class ClueExpansionManager : MonoBehaviour
     public void Reveal(ClueBehaviour clue)
     {
         float startAhapa = 0.3f;
-        clue.Reveal();
+        clue.Reveal(1f);
 
         // 룰 찾아서 자식들만 알파 세팅 + 선 그리기
         foreach (var rule in rules)
         {
             if (rule.parentClueID != clue.ID) continue;
-
             foreach (var child in rule.children)
             {
-                if (_clueDict.TryGetValue(child.childClueID, out var cb))
+                if (clueManager.ClueDict.TryGetValue(child.childClueID, out var cb))
                 {
-                    cb.gameObject.SetActive(true);
-                    // 자식 흐릿한 알파로 설정
-                    cb.SetAlpha(startAhapa);
+                    cb.Reveal(startAhapa);
                     DrawLine(clue.transform.position, cb.transform.position);
                 }
                 else
-                {
-                    Debug.LogWarning($"ClueExpansionRule에서 찾을 수 없는 childID: {child.childClueID}");
-                }
+                    Debug.Log($"ClueExpansionRule에서 찾을 수 없는 childID: {child.childClueID}");
             }
             break;
         }

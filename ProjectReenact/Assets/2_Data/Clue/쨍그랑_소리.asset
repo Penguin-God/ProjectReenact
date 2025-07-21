@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e104012b0ec1146b73915e9a241f3a, type: 3}
   m_Name: "\uCA0D\uADF8\uB791_\uC18C\uB9AC"
   m_EditorClassIdentifier: 
-  type: "\uCA0D\uADF8\uB791_\uC18C\uB9AC"
+  clueName: "\uCA0D\uADF8\uB791 \uC18C\uB9AC"
+  id: 3
